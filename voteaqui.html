@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Votação</title>
+</head>
+<body>
+  <h2>Vote aqui</h2>
+  <form id="formVoto">
+    <input type="text" name="nome" placeholder="Seu nome" required>
+    <input type="text" name="voto" placeholder="Seu voto" required>
+    <button type="submit">Votar</button>
+  </form>
+
+  <script>
+    document.getElementById("formVoto").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+
+      fetch("https://script.google.com/macros/s/AKfycbyonCErduZSimzy8-VzPQo0hE2kiUgVROLNQn2YClt3DIcxA6aQ-CVTEGZL9LpYsWz4ig/exec", {
+        method: "POST",
+        body: formData
+      })
+      .then(response => response.text())
+      .then(data => alert(data))
+      .catch(error => alert("❌ Erro ao enviar voto: " + error));
+    });
+  </script>
+</body>
+</html>
