@@ -2,15 +2,83 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Votação</title>
+  <title>Votação Escolar</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #e0f7fa, #e0f2f1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      width: 100%;
+      max-width: 400px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #00796b;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    button:hover {
+      background-color: #004d40;
+    }
+  </style>
 </head>
 <body>
-  <h2>Vote aqui</h2>
-  <form id="formVoto">
-    <input type="text" name="nome" placeholder="Seu nome" required>
-    <input type="text" name="voto" placeholder="Seu voto" required>
-    <button type="submit">Votar</button>
-  </form>
+  <div class="container">
+    <h2>Vote Aqui</h2>
+    <form id="formVoto">
+      <label for="nome">Nome:</label>
+      <input type="text" name="nome" id="nome" required>
+
+      <label for="categoria">Categoria:</label>
+      <select name="categoria" id="categoria">
+        <option value="">Selecione</option>
+        <option value="Professor">Professor</option>
+        <option value="Funcionário">Funcionário</option>
+        <option value="Fundamental">Ensino Fundamental</option>
+        <option value="MedioTecnico">Ensino Médio / Técnico</option>
+      </select>
+
+      <label for="turma">Turma (ex: 1A, 2B, 3C, 1AT, 2BT):</label>
+      <input type="text" name="turma" id="turma">
+
+      <label for="voto">Seu Voto:</label>
+      <select name="voto" id="voto" required>
+        <option value="">Selecione</option>
+        <option value="JUST DO IT">JUST DO IT</option>
+        <option value="Branco">Branco</option>
+        <option value="Nulo">Nulo</option>
+      </select>
+
+      <button type="submit">Enviar Voto</button>
+    </form>
+  </div>
 
   <script>
     document.getElementById("formVoto").addEventListener("submit", function(e) {
