@@ -29,6 +29,7 @@ padding: 20px;
 border-radius: 12px;
 box-shadow: 0px 4px 12px rgba(0,0,0,0.4);
 text-align: left;
+display: none; /* começa oculto */
 }
 label {
 display: block;
@@ -66,10 +67,22 @@ margin-top: 20px;
 font-weight: bold;
 font-size: 1.2em;
 }
+#contador {
+font-size: 1.5em;
+font-weight: bold;
+margin-top: 30px;
+background: rgba(0,0,0,0.4);
+padding: 10px;
+border-radius: 8px;
+display: inline-block;
+}
 </style>
 </head>
 <body>
-<header>🗳️ Eleição do Grêmio Estudantil 2025 - Escola Caetano de Campos</header>
+<header><p>🗳️ Eleição do Grêmio Estudantil 2025</p> 
+        <p>Escola Caetano de Campos</p></header>
+
+<div id="contador">⏳ Aguardando abertura da votação...</div>
 
 <form id="formVoto">
 <label>Nome Completo:</label>
@@ -89,7 +102,39 @@ font-size: 1.2em;
 <script>
 const scriptURL = "https://script.google.com/macros/s/AKfycbz-z5CWCEXldFDy7S2peavqYkjONXHCtA0QJqeUqXPwCn_suOMOr3eh96bNo__SSH3_DA/exec";
 
-document.getElementById("formVoto").addEventListener("submit", async (e) => {
+// DEFINA AQUI A DATA E HORA DE INÍCIO E FIM
+const inicio = new Date("2025-09-23T08:00:00-03:00"); // 23/09 às 08:00
+const fim = new Date("2025-09-23T18:00:00-03:00"); // 23/09 às 18:00
+
+const contador = document.getElementById("contador");
+const form = document.getElementById("formVoto");
+
+function atualizarContador() {
+const agora = new Date();
+
+if (agora < inicio) {
+const diff = inicio - agora;
+const h = String(Math.floor(diff / (1000*60*60))).padStart(2, "0");
+const m = String(Math.floor((diff % (1000*60*60)) / (1000*60))).padStart(2, "0");
+const s = String(Math.floor((diff % (1000*60)) / 1000)).padStart(2, "0");
+contador.textContent = `🕒 Votação abre em ${h}:${m}:${s}`;
+form.style.display = "none";
+}
+else if (agora >= inicio && agora <= fim) {
+contador.textContent = "✅ Votação ABERTA! Participe agora.";
+form.style.display = "block";
+}
+else {
+contador.textContent = "⛔ Votação encerrada às 18:00. Obrigado por participar!";
+form.style.display = "none";
+}
+}
+
+setInterval(atualizarContador, 1000);
+atualizarContador();
+
+// ENVIO DO FORMULÁRIO
+form.addEventListener("submit", async (e) => {
 e.preventDefault();
 
 const nome = document.getElementById("nome").value.trim();
@@ -106,11 +151,11 @@ body: JSON.stringify({ nome, serie, voto })
 });
 
 if (response.ok) {
-document.getElementById("mensagem").textContent = "✅ Voto registrado com sucesso! Obrigado por participar!";
+document.getElementById("mensagem").textContent = "✅ Voto registrado com sucesso!";
 document.getElementById("mensagem").style.color = "#00ff88";
-document.getElementById("formVoto").reset();
+form.reset();
 } else {
-document.getElementById("mensagem").textContent = "❌ Erro ao registrar voto. Tente novamente.";
+document.getElementById("mensagem").textContent = "❌ Erro ao registrar voto.";
 document.getElementById("mensagem").style.color = "red";
 }
 } catch (error) {
