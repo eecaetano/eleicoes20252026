@@ -6,83 +6,85 @@
 <title>Votação Grêmio Estudantil</title>
 <style>
 body {
-font-family: Arial, sans-serif;
-background: linear-gradient(135deg, #0056a6, #00b4d8);
-color: #fff;
-text-align: center;
-margin: 0;
-padding: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #0056a6, #00b4d8);
+  color: #fff;
+  text-align: center;
+  margin: 0;
+  padding: 0;
 }
 header {
-padding: 20px;
-background: rgba(0,0,0,0.3);
-font-size: 1.8em;
-font-weight: bold;
-letter-spacing: 1px;
+  padding: 20px;
+  background: rgba(0,0,0,0.3);
+  font-size: 1.8em;
+  font-weight: bold;
+  letter-spacing: 1px;
 }
 form {
-background: white;
-color: black;
-max-width: 400px;
-margin: 30px auto;
-padding: 20px;
-border-radius: 12px;
-box-shadow: 0px 4px 12px rgba(0,0,0,0.4);
-text-align: left;
+  background: white;
+  color: black;
+  max-width: 400px;
+  margin: 30px auto;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.4);
+  text-align: left;
 }
 label {
-display: block;
-font-weight: bold;
-margin-top: 10px;
+  display: block;
+  font-weight: bold;
+  margin-top: 10px;
 }
 input[type="text"] {
-width: 100%;
-padding: 8px;
-margin-top: 5px;
-border-radius: 6px;
-border: 1px solid #ccc;
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
 }
 input[type="radio"] {
-margin-right: 5px;
+  margin-right: 5px;
 }
 button {
-background: #0056a6;
-color: white;
-border: none;
-padding: 12px 18px;
-margin-top: 15px;
-font-size: 1em;
-border-radius: 8px;
-cursor: pointer;
-width: 100%;
-transition: 0.2s;
+  background: #0056a6;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  margin-top: 15px;
+  font-size: 1em;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  transition: 0.2s;
 }
 button:hover {
-background: #0077cc;
-transform: scale(1.02);
+  background: #0077cc;
+  transform: scale(1.02);
 }
 #mensagem {
-margin-top: 20px;
-font-weight: bold;
-font-size: 1.2em;
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 1.2em;
 }
 </style>
 </head>
 <body>
-<header><p>🗳️ Eleição do Grêmio Estudantil 2025</p> 
-        <p>Escola Caetano de Campos</p></header>
+<header>
+  <p>🗳️ Eleição do Grêmio Estudantil 2025</p>
+  <p>Escola Caetano de Campos</p>
+</header>
 
 <form id="formVoto">
-<label>Nome Completo:</label>
-<input type="text" id="nome" placeholder="Digite seu nome" required>
+  <label>Nome Completo:</label>
+  <input type="text" id="nome" placeholder="Digite seu nome" required>
 
-<label>Série:</label>
-<input type="text" id="serie" placeholder="Ex: 8ºA, 3ºB" required>
+  <label>Série:</label>
+  <input type="text" id="serie" placeholder="Ex: 8ºA, 3ºB" required>
 
-<label>Escolha seu voto:</label>
-<input type="radio" name="voto" value="Just Do It" required> Just Do It 🎯
+  <label>Escolha seu voto:</label>
+  <input type="radio" name="voto" value="Just Do It" required> Just Do It 🎯
 
-<button type="submit">CONFIRMAR VOTO</button>
+  <button type="submit">CONFIRMAR VOTO</button>
 </form>
 
 <p id="mensagem"></p>
@@ -124,6 +126,5 @@ document.getElementById("formVoto").addEventListener("submit", async (e) => {
   }
 });
 </script>
-
 </body>
 </html>
