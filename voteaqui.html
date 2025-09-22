@@ -35,10 +35,12 @@ label {
   font-weight: bold;
   margin-top: 10px;
 }
+input[type="text"], input[type="radio"] {
+  margin-top: 5px;
+}
 input[type="text"] {
   width: 100%;
   padding: 8px;
-  margin-top: 5px;
   border-radius: 6px;
   border: 1px solid #ccc;
 }
@@ -82,7 +84,9 @@ button:hover {
   <input type="text" id="serie" placeholder="Ex: 8ºA, 3ºB" required>
 
   <label>Escolha seu voto:</label>
-  <input type="radio" name="voto" value="Just Do It" required> Just Do It 🎯
+  <input type="radio" name="voto" value="Just Do It" required> Just Do It 🎯<br>
+  <input type="radio" name="voto" value="Branco"> Voto em Branco ⚪<br>
+  <input type="radio" name="voto" value="Nulo"> Voto Nulo ❌
 
   <button type="submit">CONFIRMAR VOTO</button>
 </form>
@@ -90,7 +94,7 @@ button:hover {
 <p id="mensagem"></p>
 
 <script>
-  const scriptURL = "https://script.google.com/macros/s/AKfycbzfGPOZAX3I45C7GJ9yN-QW9qEdOnbIqWTm9WWBkRbToaF-S6GaBkMLeVKcD2nbp1z7mA/exec";
+const scriptURL = "https://script.google.com/macros/s/AKfycbzfGPOZAX3I45C7GJ9yN-QW9qEdOnbIqWTm9WWBkRbToaF-S6GaBkMLeVKcD2nbp1z7mA/exec";
 
 document.getElementById("formVoto").addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -102,14 +106,10 @@ document.getElementById("formVoto").addEventListener("submit", async (e) => {
   document.getElementById("mensagem").textContent = "⏳ Registrando seu voto...";
 
   try {
-    const formData = new URLSearchParams();
-    formData.append("nome", nome);
-    formData.append("serie", serie);
-    formData.append("voto", voto);
-
     const response = await fetch(scriptURL, {
       method: "POST",
-      body: formData
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ nome, serie, voto })
     });
 
     if (response.ok) {
