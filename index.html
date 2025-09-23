@@ -1,25 +1,144 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Votação Grêmio Estudantil</title>
-<link rel="stylesheet" href="estilos.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Votação Grêmio Estudantil</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0056a6, #00b4d8);
+      color: #fff;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      padding: 20px;
+      background: rgba(0,0,0,0.3);
+      font-size: 1.8em;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+    form {
+      background: white;
+      color: black;
+      max-width: 400px;
+      margin: 30px auto;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0px 4px 12px rgba(0,0,0,0.4);
+      text-align: left;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+    }
+    .perfil {
+      margin-top: 10px;
+    }
+    .perfil input[type="radio"] {
+      margin-right: 6px;
+    }
+    .voto-opcoes {
+      margin-top: 20px;
+      border-top: 2px solid #ccc;
+      padding-top: 15px;
+    }
+    input[type="radio"] {
+      margin-right: 5px;
+    }
+    button {
+      background: #0056a6;
+      color: white;
+      border: none;
+      padding: 14px 20px;
+      margin-top: 30px;
+      font-size: 1em;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      transition: 0.2s;
+    }
+    button:hover {
+      background: #0077cc;
+      transform: scale(1.02);
+    }
+    #mensagem {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+  </style>
 </head>
 <body>
-<header>
-  <p>🗳️ Eleição do Grêmio Estudantil 2025</p>
-  <p>Escola Caetano de Campos</p>
-</header>
+  <header>🗳️ Eleição do Grêmio Estudantil - Caetano de Campos</header>
 
-<p>🕒 A votação começa em breve. Aguarde...</p>
+  <form id="formVoto">
+    <label>Nome Completo:</label>
+    <input type="text" id="nome" placeholder="Digite seu nome" required>
 
-<script>
-const inicio = new Date("2025-09-22T19:18:00-03:00");
-const agora = new Date();
-if (agora >= inicio) {{
-  window.location.href = "voteaqui.html";
-}}
-</script>
+    <label>Sou:</label>
+    <div class="perfil">
+      <input type="radio" name="perfil" value="Professor"> Professor
+      <input type="radio" name="perfil" value="Funcionário"> Funcionário
+      <input type="radio" name="perfil" value="Estudante"> Estudante
+    </div>
+
+    <label>Série e Turma:</label>
+    <input type="text" id="serie" placeholder="Ex: 8ºA, 3ºB">
+
+    <div class="voto-opcoes">
+      <label>ESCOLHA:</label>
+      <input type="radio" name="voto" value="Just Do It" required> Chapa 'JUST DO IT' 🎯<br>
+      <input type="radio" name="voto" value="Branco"> Voto em Branco<br>
+      <input type="radio" name="voto" value="Nulo"> Voto Nulo
+    </div>
+
+    <button type="submit">CONFIRME SEU VOTO</button>
+  </form>
+
+  <p id="mensagem"></p>
+
+  <script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbyonCErduZSimzy8-VzPQo0hE2kiUgVROLNQn2YClt3DIcxA6aQ-CVTEGZL9LpYsWz4ig/exec";
+
+    document.getElementById("formVoto").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const nome = document.getElementById("nome").value.trim();
+      const voto = document.querySelector('input[name="voto"]:checked').value;
+
+      document.getElementById("mensagem").textContent = "⏳ Registrando seu voto...";
+
+      try {
+        const formData = new FormData();
+        formData.append("nome", nome);
+        formData.append("voto", voto);
+
+        const response = await fetch(scriptURL, {
+          method: "POST",
+          body: formData
+        });
+
+        const result = await response.text();
+        document.getElementById("mensagem").textContent = result;
+        document.getElementById("mensagem").style.color = "#00ff88";
+        document.getElementById("formVoto").reset();
+      } catch (error) {
+        document.getElementById("mensagem").textContent = "⚠️ Erro de conexão!";
+        document.getElementById("mensagem").style.color = "yellow";
+      }
+    });
+  </script>
 </body>
 </html>
