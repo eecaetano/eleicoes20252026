@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -5,6 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Votação Grêmio Estudantil</title>
   <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: Arial, sans-serif;
       background: linear-gradient(135deg, #0056a6, #00b4d8);
@@ -13,6 +20,7 @@
       margin: 0;
       padding: 0;
     }
+
     header {
       padding: 20px;
       background: rgba(0,0,0,0.3);
@@ -20,6 +28,7 @@
       font-weight: bold;
       letter-spacing: 1px;
     }
+
     form {
       background: white;
       color: black;
@@ -30,11 +39,13 @@
       box-shadow: 0px 4px 12px rgba(0,0,0,0.4);
       text-align: left;
     }
+
     label {
       display: block;
       font-weight: bold;
       margin-top: 20px;
     }
+
     input[type="text"] {
       width: 100%;
       padding: 12px;
@@ -43,20 +54,31 @@
       border: 1px solid #ccc;
       font-size: 1em;
     }
+
     .perfil {
       margin-top: 10px;
     }
+
+    .perfil label {
+      display: inline-block;
+      margin-right: 10px;
+      font-weight: normal;
+    }
+
     .perfil input[type="radio"] {
       margin-right: 6px;
     }
+
     .voto-opcoes {
       margin-top: 20px;
       border-top: 2px solid #ccc;
       padding-top: 15px;
     }
+
     input[type="radio"] {
       margin-right: 5px;
     }
+
     button {
       background: #0056a6;
       color: white;
@@ -69,10 +91,12 @@
       width: 100%;
       transition: 0.2s;
     }
+
     button:hover {
       background: #0077cc;
       transform: scale(1.02);
     }
+
     #mensagem {
       margin-top: 20px;
       font-weight: bold;
